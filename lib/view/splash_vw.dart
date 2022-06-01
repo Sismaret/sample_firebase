@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:sample_firebase/constants/app_assets.dart';
+import 'package:sample_firebase/constants/app_colors.dart';
 import 'package:sample_firebase/view/login_vw.dart';
 
 class SplashVw extends StatelessWidget {
@@ -8,20 +10,18 @@ class SplashVw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => LoginVw()));
     });
-    return SafeArea(
-        child: Container(
-      color: Colors.blueAccent,
-      child: Center(
+    return Scaffold(
+      backgroundColor: AppColors.primary,
+      body: Center(
         child: Image.asset(
-          'assets/auth/ic_splash.png',
-          height: 200,
-          width: 200,
+          AppAssets.iconFlash,
+          width: MediaQuery.of(context).size.width * 0.5,
         ),
       ),
-    ));
+    );
   }
 }
