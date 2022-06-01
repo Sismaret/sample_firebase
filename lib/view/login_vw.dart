@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/constants/app_colors.dart';
 import 'package:sample_firebase/constants/app_labels.dart';
+import 'package:sample_firebase/view/register_vw..dart';
+import 'package:sample_firebase/widgets/button_login.dart';
 
-class LoginVw extends StatelessWidget {
+class LoginVw extends StatefulWidget {
   const LoginVw({Key? key}) : super(key: key);
 
+  @override
+  State<LoginVw> createState() => _LoginVwState();
+}
+
+class _LoginVwState extends State<LoginVw> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +27,19 @@ class LoginVw extends StatelessWidget {
                   AppLabels.lblLogin,
                   textAlign: TextAlign.left,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20.0),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
                 ),
               ),
               const SizedBox(
-                height: 30.0,
+                height: 20.0,
               ),
               Image.asset(
                 AppAssets.iconLogin,
                 alignment: Alignment.center,
-              ),
-              const SizedBox(
-                height: 20.0,
+                // height: 50,
+                // width: 50,
               ),
               Align(
                 alignment: Alignment.center,
@@ -49,40 +57,30 @@ class LoginVw extends StatelessWidget {
               const Spacer(),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 60, vertical: 12),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLabels.lblLoginGoogle,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                        Image.asset(AppAssets.iconLoginGoogle),
-                      ],
-                    )),
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                child: ButtonLogin(
+                  loginWith: AppLabels.lblLoginGoogle,
+                  backgroundColor: Colors.white,
+                  iconLogin: AppAssets.iconLoginGoogle,
+                  loginTextColor: Colors.black,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterVw()));
+                  },
+                ),
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 60, vertical: 1),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        primary: Colors.black),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(AppLabels.lblLoginApple),
-                        Image.asset(AppAssets.iconLoginApple),
-                      ],
-                    )),
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                child: ButtonLogin(
+                  loginWith: AppLabels.lblLoginApple,
+                  backgroundColor: Colors.black,
+                  iconLogin: AppAssets.iconLoginApple,
+                  loginTextColor: Colors.white,
+                  onTap: () {},
+                ),
               ),
             ],
           ),
