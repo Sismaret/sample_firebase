@@ -20,14 +20,14 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Lato',
         primarySwatch: Colors.blue,
       ),
-      home: const SplashVw(),
-      // initialRoute: "/",
-      // routes: {
-      //   "/": (context) => const SplashVw(),
-      //   "/login": (context) => const LoginVw(),
-      //   "/home": (context) => const HomeVw(),
-      //   "/register": (context) => const RegisterVw(),
-      // },
+      // home: const SplashVw(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const SplashVw(),
+        "/login": (context) => const LoginVw(),
+        "/home": (context) => const HomeVw(),
+        "/register": (context) => const RegisterVw(),
+      },
     );
   }
 }

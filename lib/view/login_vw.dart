@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/constants/app_colors.dart';
 import 'package:sample_firebase/constants/app_labels.dart';
+import 'package:sample_firebase/view/home_vw.dart';
 import 'package:sample_firebase/view/register_vw..dart';
 import 'package:sample_firebase/widgets/button_login.dart';
 
@@ -33,13 +34,12 @@ class _LoginVwState extends State<LoginVw> {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               Image.asset(
                 AppAssets.iconLogin,
                 alignment: Alignment.center,
-                // height: 50,
-                // width: 50,
+                width: MediaQuery.of(context).size.width * 2,
               ),
               Align(
                 alignment: Alignment.center,
@@ -67,7 +67,7 @@ class _LoginVwState extends State<LoginVw> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterVw()));
+                            builder: (context) => const HomeVw()));
                   },
                 ),
               ),
