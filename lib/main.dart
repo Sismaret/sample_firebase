@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sample_firebase/view/home_vw.dart';
+import 'package:sample_firebase/mainview/home_vw.dart';
 import 'package:sample_firebase/view/login_vw.dart';
 import 'package:sample_firebase/view/register_vw..dart';
 import 'package:sample_firebase/view/splash_vw.dart';
