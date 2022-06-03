@@ -6,4 +6,6 @@ class AppAssets {
   static String iconProfile = 'assets/ic_avatar.png';
   static String iconKimia = 'assets/ic_kimia.png';
   static String iconFisika = 'assets/ic_atom.png';
+  static String iconImageHome = 'assets/img_home.png';
+  static String iconImageBanner = 'assets/img_banner.png';
 }

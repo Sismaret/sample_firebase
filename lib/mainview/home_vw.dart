@@ -1,5 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
+import 'package:sample_firebase/mainview/lessons_vw.dart';
+import 'package:sample_firebase/mainview/profile_vw.dart';
 import 'package:sample_firebase/widgets/card_lesson.dart';
 
 class HomeVw extends StatefulWidget {
@@ -10,6 +13,7 @@ class HomeVw extends StatefulWidget {
 }
 
 class _HomeVwState extends State<HomeVw> {
+  void goToLesson() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +29,7 @@ class _HomeVwState extends State<HomeVw> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Hai, Sismaret'),
-                    Text('Selamat datang')
-                  ],
+                  children: const [Text('Hai, Sismaret'), Text('Welcome')],
                 ),
                 Image.asset(
                   AppAssets.iconProfile,
@@ -40,11 +41,32 @@ class _HomeVwState extends State<HomeVw> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              height: 150,
-              decoration: const BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+            Stack(
+              children: [
+                Container(
+                  height: 135,
+                  decoration: const BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+                const Positioned(
+                  child: Text(
+                    'I can do it !!!',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  left: 10,
+                  top: 10,
+                ),
+                Positioned(
+                  child: Image.asset(
+                    AppAssets.iconImageHome,
+                    height: 135,
+                    width: 250,
+                  ),
+                  left: 150,
+                )
+              ],
             ),
             const SizedBox(
               height: 10,
@@ -63,38 +85,61 @@ class _HomeVwState extends State<HomeVw> {
               ],
             ),
             const SizedBox(
-              height: 10,
-            ),
-            const Expanded(
-              child: CardLesson(),
-            ),
-            const SizedBox(
               height: 5,
-            ),
-            const Expanded(
-              child: CardLesson(),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Expanded(
-              child: CardLesson(),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: Colors.greenAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: CardLesson(
+                goToLesson: goToLesson,
               ),
             ),
+            const SizedBox(
+              height: 5,
+            ),
+            Expanded(
+              child: CardLesson(
+                goToLesson: goToLesson,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Expanded(
+              child: CardLesson(
+                goToLesson: goToLesson,
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            CarouselSlider(
+              options: CarouselOptions(height: 135.0),
+              items: [
+                Container(
+                  width: double.infinity,
+                  child: Image.asset(
+                    AppAssets.iconImageBanner,
+                    fit: BoxFit.fill,
+                  ),
+                  decoration: const BoxDecoration(
+                      color: Colors.greenAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+                Container(
+                  width: 250,
+                  decoration: const BoxDecoration(
+                      color: Colors.orangeAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+              ],
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LessonsVw()));
+        },
         child: Image.asset(
           'assets/ic_discuss.png',
           height: 35,
@@ -122,7 +167,10 @@ class _HomeVwState extends State<HomeVw> {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Material(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ProfileVw()));
+                        },
                         child: Column(
                           children: [
                             Image.asset(
