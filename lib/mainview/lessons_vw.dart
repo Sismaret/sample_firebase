@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_firebase/mainview/subject_vw.dart';
 import 'package:sample_firebase/widgets/card_lesson.dart';
 
 class LessonsVw extends StatefulWidget {
@@ -10,6 +11,7 @@ class LessonsVw extends StatefulWidget {
 
 class _LessonsVwState extends State<LessonsVw> {
   void goToLesson() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,10 @@ class _LessonsVwState extends State<LessonsVw> {
         child: Column(children: [
           Expanded(
             child: CardLesson(
-              goToLesson: goToLesson,
+              goToLesson: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const SubjectVw()));
+              },
             ),
           ),
           SizedBox(
