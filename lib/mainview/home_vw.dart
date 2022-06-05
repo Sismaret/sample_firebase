@@ -1,9 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
+import 'package:sample_firebase/mainview/chat_vw.dart';
 import 'package:sample_firebase/mainview/lessons_vw.dart';
 import 'package:sample_firebase/mainview/profile_vw.dart';
-import 'package:sample_firebase/widgets/card_lesson.dart';
+import 'package:sample_firebase/services/subject_serv.dart';
+import 'package:sample_firebase/services/user_serv.dart';
+import 'package:sample_firebase/widgets/button_nav.dart';
+import 'package:sample_firebase/widgets/carousel_home.dart';
 
 class HomeVw extends StatefulWidget {
   const HomeVw({Key? key}) : super(key: key);
@@ -14,8 +18,14 @@ class HomeVw extends StatefulWidget {
 
 class _HomeVwState extends State<HomeVw> {
   void goToLesson() {}
+
+  SubjectServ subjectServ = SubjectServ();
+  UserServ userServ = UserServ();
+  String? fullName;
+
   @override
   Widget build(BuildContext context) {
+    fullName = userServ.getFullName();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -29,7 +39,7 @@ class _HomeVwState extends State<HomeVw> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [Text('Hai, Sismaret'), Text('Welcome')],
+                  children: [Text('Hai, $fullName'), const Text('Welcome')],
                 ),
                 Image.asset(
                   AppAssets.iconProfile,
@@ -60,7 +70,7 @@ class _HomeVwState extends State<HomeVw> {
                 ),
                 Positioned(
                   child: Image.asset(
-                    AppAssets.iconImageHome,
+                    AppAssets.imageHome,
                     height: 135,
                     width: 250,
                   ),
@@ -73,62 +83,37 @@ class _HomeVwState extends State<HomeVw> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'Choose lessons',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  'More details ...',
-                  style: TextStyle(color: Colors.blueAccent),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LessonsVw()));
+                  },
+                  child: const Text(
+                    'More details ...',
+                    style: TextStyle(color: Colors.blueAccent),
+                  ),
                 )
               ],
             ),
             const SizedBox(
               height: 5,
             ),
-            Expanded(
-              child: CardLesson(
-                goToLesson: goToLesson,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Expanded(
-              child: CardLesson(
-                goToLesson: goToLesson,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Expanded(
-              child: CardLesson(
-                goToLesson: goToLesson,
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+            ...subjectServ.getAllCardSubjects(),
             CarouselSlider(
               options: CarouselOptions(height: 135.0),
-              items: [
-                Container(
-                  width: double.infinity,
-                  child: Image.asset(
-                    AppAssets.iconImageBanner,
-                    fit: BoxFit.fill,
-                  ),
-                  decoration: const BoxDecoration(
-                      color: Colors.greenAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+              items: const [
+                CarouselHome(
+                  backgroundColor: Colors.white,
                 ),
-                Container(
-                  width: 250,
-                  decoration: const BoxDecoration(
-                      color: Colors.orangeAccent,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                CarouselHome(
+                  backgroundColor: Colors.white,
                 ),
               ],
             )
@@ -137,91 +122,52 @@ class _HomeVwState extends State<HomeVw> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LessonsVw()));
+          print('To Chat View');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ChatWv()));
         },
         child: Image.asset(
-          'assets/ic_discuss.png',
+          AppAssets.iconDiscuss,
           height: 35,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 20,
-                  color: Colors.black.withOpacity(0.06))
-            ],
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0))),
+          boxShadow: [
+            BoxShadow(
+                offset: const Offset(0, 4),
+                blurRadius: 20,
+                color: Colors.black.withOpacity(0.006))
+          ],
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
+        ),
         child: BottomAppBar(
-            color: Colors.white,
-            child: Container(
-              height: 60,
+            shape: const CircularNotchedRectangle(),
+            child: SizedBox(
+              height: 50,
               child: Row(children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ProfileVw()));
-                        },
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/ic_home.png',
-                              height: 20,
-                            ),
-                            Text('Home'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                ButtonNav(
+                  imageLoc: AppAssets.iconHome,
+                  lblButton: 'Home',
+                  goProfile: () {},
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {},
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/ic_discuss.png',
-                              height: 20,
-                            ),
-                            Text('Discuss'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                ButtonNav(
+                  imageLoc: AppAssets.iconDiscuss,
+                  lblButton: 'Discussion',
+                  goProfile: () {},
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {},
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/ic_profile.png',
-                              height: 20,
-                            ),
-                            Text('Profile'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                ButtonNav(
+                  imageLoc: AppAssets.iconProfile,
+                  lblButton: 'Profile',
+                  goProfile: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfileVw()));
+                  },
+                ),
               ]),
             )),
       ),

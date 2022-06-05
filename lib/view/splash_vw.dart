@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/constants/app_colors.dart';
+import 'package:sample_firebase/mainview/home_vw.dart';
 import 'package:sample_firebase/view/login_vw.dart';
+import 'package:sample_firebase/view/register_vw..dart';
 
 class SplashVw extends StatefulWidget {
   const SplashVw({Key? key}) : super(key: key);
@@ -17,9 +21,16 @@ class _SplashVwState extends State<SplashVw> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginVw()));
+    Timer(const Duration(seconds: 5), () async {
+      final user = FirebaseAuth.instance.currentUser;
+      print(user);
+      if (user != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomeVw()));
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const LoginVw()));
+      }
     });
   }
 

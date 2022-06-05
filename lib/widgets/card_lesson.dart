@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sample_firebase/constants/app_assets.dart';
 
 class CardLesson extends StatelessWidget {
   final Function() goToLesson;
-  const CardLesson({Key? key, required this.goToLesson}) : super(key: key);
+  final String imageLoc;
+  final String subject;
+  final String progressPackage;
+
+  const CardLesson({
+    Key? key,
+    required this.goToLesson,
+    required this.imageLoc,
+    required this.subject,
+    required this.progressPackage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,9 @@ class CardLesson extends StatelessWidget {
                         color: const Color(0xffF3F7F8),
                         borderRadius: BorderRadius.circular(5)),
                     child: Image.asset(
-                      AppAssets.iconFisika,
+                      imageLoc,
+                      width: 40,
+                      height: 40,
                     ),
                   ),
                 ),
@@ -35,21 +46,21 @@ class CardLesson extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Math',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Text(
+                        subject,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      const Text('0/50 Package excercise questions'),
-                      SizedBox(
+                      Text('$progressPackage + Package excercise questions'),
+                      const SizedBox(
                         height: 5,
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: SliderTheme(
                           data: SliderThemeData(
                             overlayShape: SliderComponentShape.noThumb,
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 0),
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 0),
                           ),
                           child: Slider(
                             value: 50,
@@ -61,6 +72,9 @@ class CardLesson extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 5.0,
               )
             ],
           )),
