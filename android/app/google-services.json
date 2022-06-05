@@ -7,42 +7,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1029733319658:android:131217a8616962c347e893",
-        "android_client_info": {
-          "package_name": "com.example.sample_api"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1029733319658-qqlu8gvu6u93j2db7u4f77tccdqb1erl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBLGjn0AmIYjWTUWqMbagkecirj99ue5zA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1029733319658-qqlu8gvu6u93j2db7u4f77tccdqb1erl.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1029733319658-q58e5u40grb26dm37m6pd126n15q6bjk.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.sampleApi"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1029733319658:android:90cb161fcf5b7e4047e893",
         "android_client_info": {
           "package_name": "com.example.sample_firebase"
@@ -67,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1029733319658-q58e5u40grb26dm37m6pd126n15q6bjk.apps.googleusercontent.com",
+              "client_id": "1029733319658-crlcrp4rlqs8qh063l63bea0o3923nlt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.sampleApi"
+                "bundle_id": "com.example.sampleFirebase"
               }
             }
           ]
