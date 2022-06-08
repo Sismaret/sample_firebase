@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_firebase/firebase_options.dart';
 import 'package:sample_firebase/mainview/home_vw.dart';
+import 'package:sample_firebase/mainview/nav_vw.dart';
 import 'package:sample_firebase/view/login_vw.dart';
 import 'package:sample_firebase/view/register_vw..dart';
 import 'package:sample_firebase/view/splash_vw.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Lato',
         primarySwatch: Colors.blue,
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const SplashVw(),
         "/login": (context) => const LoginVw(),
         "/home": (context) => const HomeVw(),
+        "/nav": (context) => const NavVw(),
         "/register": (context) => const RegisterVw(),
       },
     );

@@ -4,14 +4,14 @@ import 'package:sample_firebase/mainview/subject_vw.dart';
 import 'package:sample_firebase/services/subject_serv.dart';
 import 'package:sample_firebase/widgets/card_lesson.dart';
 
-class LessonsVw extends StatefulWidget {
-  const LessonsVw({Key? key}) : super(key: key);
+class SubjectsVw extends StatefulWidget {
+  const SubjectsVw({Key? key}) : super(key: key);
 
   @override
-  State<LessonsVw> createState() => _LessonsVwState();
+  State<SubjectsVw> createState() => _SubjectsVwState();
 }
 
-class _LessonsVwState extends State<LessonsVw> {
+class _SubjectsVwState extends State<SubjectsVw> {
   void goToLesson() {}
 
   @override

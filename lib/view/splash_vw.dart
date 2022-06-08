@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/constants/app_colors.dart';
 import 'package:sample_firebase/mainview/home_vw.dart';
+import 'package:sample_firebase/mainview/nav_vw.dart';
 import 'package:sample_firebase/view/login_vw.dart';
 import 'package:sample_firebase/view/register_vw..dart';
 
@@ -26,7 +27,7 @@ class _SplashVwState extends State<SplashVw> {
       print(user);
       if (user != null) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomeVw()));
+            context, MaterialPageRoute(builder: (context) => const NavVw()));
       } else {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const LoginVw()));

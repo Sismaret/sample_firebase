@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample_firebase/constants/app_colors.dart';
 
 class ChatWv extends StatefulWidget {
   const ChatWv({Key? key}) : super(key: key);
@@ -16,32 +15,39 @@ class _ChatWvState extends State<ChatWv> {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
             child: Container(
-              decoration: BoxDecoration(color: AppColors.backColor),
+              decoration: BoxDecoration(color: Colors.grey),
+              child: ListView.builder(
+                  itemCount: 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container();
+                  }),
             ),
           ),
-          Row(
-            children: [
-              SizedBox(
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  height: 30,
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
+          SizedBox(
+            child: Row(
+              children: [
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: const Icon(Icons.add_circle_outline_sharp),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: Row(children: const [
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Message ...',
+                              suffixIcon: Icon(Icons.camera_alt)),
+                        ),
                       ),
-                      const TextField(
-                        decoration:
-                            InputDecoration(hintText: 'Type in here ...'),
-                      )
-                    ],
+                    ]),
                   ),
                 ),
-              )
-            ],
+                IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
+              ],
+            ),
           )
         ],
       ),

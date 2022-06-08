@@ -19,22 +19,23 @@ class CardLesson extends StatelessWidget {
     return GestureDetector(
       onTap: goToLesson,
       child: Card(
-          elevation: 0,
+          elevation: 3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 5, 5, 5),
                   child: Container(
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         color: const Color(0xffF3F7F8),
                         borderRadius: BorderRadius.circular(5)),
                     child: Image.asset(
                       imageLoc,
-                      width: 40,
-                      height: 40,
+                      width: 20,
+                      height: 20,
                     ),
                   ),
                 ),

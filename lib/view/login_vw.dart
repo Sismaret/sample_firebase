@@ -5,6 +5,7 @@ import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/constants/app_colors.dart';
 import 'package:sample_firebase/constants/app_labels.dart';
 import 'package:sample_firebase/mainview/home_vw.dart';
+import 'package:sample_firebase/mainview/nav_vw.dart';
 import 'package:sample_firebase/widgets/button_login.dart';
 
 class LoginVw extends StatefulWidget {
@@ -48,17 +49,20 @@ class _LoginVwState extends State<LoginVw> {
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
+                    fontSize: 30.0,
                   ),
                 ),
               ),
               const SizedBox(
-                height: 40.0,
+                height: 60.0,
               ),
               Image.asset(
-                AppAssets.iconLogin,
+                AppAssets.imageLogin,
                 alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width * 2,
+                width: MediaQuery.of(context).size.width * 1,
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Align(
                 alignment: Alignment.center,
@@ -71,7 +75,7 @@ class _LoginVwState extends State<LoginVw> {
               Text(
                 AppLabels.lblWelcomeDesc,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12.0),
+                style: const TextStyle(fontSize: 14.0),
               ),
               const Spacer(),
               Padding(
@@ -85,12 +89,11 @@ class _LoginVwState extends State<LoginVw> {
                   onTap: () async {
                     await signInWithGoogle();
                     final user = FirebaseAuth.instance.currentUser;
-                    print(user);
                     if (user != null) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeVw()));
+                              builder: (context) => const NavVw()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Failed to login'),

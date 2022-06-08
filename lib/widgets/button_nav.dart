@@ -15,7 +15,7 @@ class ButtonNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: const EdgeInsets.all(10),
         child: Material(
           color: Colors.white,
           child: InkWell(
@@ -25,9 +25,12 @@ class ButtonNav extends StatelessWidget {
               children: [
                 Image.asset(
                   imageLoc,
-                  height: 20,
+                  height: 25,
                 ),
-                Text(lblButton),
+                // Text(
+                //   lblButton,
+                //   style: TextStyle(fontSize: 10),
+                // ),
               ],
             ),
           ),

@@ -2,10 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/constants/app_assets.dart';
 import 'package:sample_firebase/mainview/chat_vw.dart';
-import 'package:sample_firebase/mainview/lessons_vw.dart';
+import 'package:sample_firebase/mainview/subjects_vw.dart';
 import 'package:sample_firebase/mainview/profile_vw.dart';
 import 'package:sample_firebase/services/subject_serv.dart';
 import 'package:sample_firebase/services/user_serv.dart';
+import 'package:sample_firebase/view/register_vw..dart';
 import 'package:sample_firebase/widgets/button_nav.dart';
 import 'package:sample_firebase/widgets/carousel_home.dart';
 
@@ -26,35 +27,48 @@ class _HomeVwState extends State<HomeVw> {
   @override
   Widget build(BuildContext context) {
     fullName = userServ.getFullName();
-    return Scaffold(
-      body: Padding(
+    return SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text('Hai, $fullName'), const Text('Welcome')],
+                  children: [
+                    Text(
+                      'Hai, $fullName',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    const Text('Welcome')
+                  ],
                 ),
-                Image.asset(
-                  AppAssets.iconProfile,
-                  height: 30,
-                  width: 30,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => RegisterVw()));
+                  },
+                  child: Image.asset(
+                    AppAssets.iconProfile,
+                    height: 30,
+                    width: 30,
+                  ),
                 )
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             Stack(
               children: [
                 Container(
-                  height: 135,
+                  height: 150,
                   decoration: const BoxDecoration(
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -63,29 +77,32 @@ class _HomeVwState extends State<HomeVw> {
                   child: Text(
                     'I can do it !!!',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
                   ),
                   left: 10,
-                  top: 10,
+                  top: 20,
                 ),
                 Positioned(
                   child: Image.asset(
                     AppAssets.imageHome,
-                    height: 135,
+                    height: 130,
                     width: 250,
                   ),
                   left: 150,
+                  bottom: 0,
                 )
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Choose lessons',
+                  'Choose subjects',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 GestureDetector(
@@ -93,7 +110,7 @@ class _HomeVwState extends State<HomeVw> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LessonsVw()));
+                            builder: (context) => const SubjectsVw()));
                   },
                   child: const Text(
                     'More details ...',
@@ -103,11 +120,14 @@ class _HomeVwState extends State<HomeVw> {
               ],
             ),
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
             ...subjectServ.getAllCardSubjects(),
+            const SizedBox(
+              height: 20,
+            ),
             CarouselSlider(
-              options: CarouselOptions(height: 135.0),
+              options: CarouselOptions(height: 150.0),
               items: const [
                 CarouselHome(
                   backgroundColor: Colors.white,
@@ -119,57 +139,6 @@ class _HomeVwState extends State<HomeVw> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('To Chat View');
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const ChatWv()));
-        },
-        child: Image.asset(
-          AppAssets.iconDiscuss,
-          height: 35,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(0, 4),
-                blurRadius: 20,
-                color: Colors.black.withOpacity(0.006))
-          ],
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-        ),
-        child: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            child: SizedBox(
-              height: 50,
-              child: Row(children: [
-                ButtonNav(
-                  imageLoc: AppAssets.iconHome,
-                  lblButton: 'Home',
-                  goProfile: () {},
-                ),
-                ButtonNav(
-                  imageLoc: AppAssets.iconDiscuss,
-                  lblButton: 'Discussion',
-                  goProfile: () {},
-                ),
-                ButtonNav(
-                  imageLoc: AppAssets.iconProfile,
-                  lblButton: 'Profile',
-                  goProfile: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfileVw()));
-                  },
-                ),
-              ]),
-            )),
       ),
     );
   }

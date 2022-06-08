@@ -1,6 +1,9 @@
 class AppAssets {
   static String iconFlash = 'assets/auth/ic_splash.png';
-  static String iconLogin = 'assets/auth/img_login.png';
+  static String iconNote = 'assets/ic_note.png';
+  static String iconLang = 'assets/ic_lang.png';
+  static String iconDna = 'assets/ic_dna.png';
+  static String imageLogin = 'assets/auth/img_login.png';
   static String iconDiscuss = 'assets/ic_discuss.png';
   static String iconLoginApple = 'assets/auth/ic_apple.png';
   static String iconLoginGoogle = 'assets/auth/ic_google.png';
