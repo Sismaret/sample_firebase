@@ -51,7 +51,7 @@ class CardLesson extends StatelessWidget {
                         subject,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text('$progressPackage + Package excercise questions'),
+                      Text('$progressPackage  Package excercise questions'),
                       const SizedBox(
                         height: 5,
                       ),
