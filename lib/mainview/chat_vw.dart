@@ -1,3 +1,6 @@
+import 'dart:collection';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/model/chat_model.dart';
@@ -14,11 +17,10 @@ class _ChatWvState extends State<ChatWv> {
   @override
   Widget build(BuildContext context) {
     TextEditingController chatController = TextEditingController();
-    var db = FirebaseFirestore.instance;
-    final docRef = db.collection('chats');
+    CollectionReference db = FirebaseFirestore.instance.collection('chats');
+    // final docRef = db.collection('chats');
     ChatModel chatModel = ChatModel();
-    // Test
-    Timestamp test;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Chat Discussion')),
       body: Column(
@@ -27,25 +29,24 @@ class _ChatWvState extends State<ChatWv> {
             child: Container(
               decoration: const BoxDecoration(color: Colors.grey),
               child: FutureBuilder<QuerySnapshot>(
-                  future: docRef.get(),
+                  future: db.get(),
                   builder: ((context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      List<QueryDocumentSnapshot> result = snapshot.data!.docs;
                       return ListView.builder(
                           reverse: true,
-                          itemCount: snapshot.data!.docs.length,
+                          itemCount: result.length,
                           itemBuilder: ((context, index) {
                             return ChatContent(
-                              chat: snapshot.data!.docs[index]['chat'],
-                              timeStamp: snapshot.data!.docs[index]
-                                  ['timestamp'],
-                              user: snapshot.data!.docs[index]['user'],
+                              chat: result[index]['chat'],
+                              timeStamp: result[index]['timestamp'],
+                              user: result[index]['user'],
                             );
                           }));
                     }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   })),
             ),
           ),
@@ -82,7 +83,7 @@ class _ChatWvState extends State<ChatWv> {
                 IconButton(
                     onPressed: () {
                       if (chatController.text.isNotEmpty) {
-                        docRef.add({
+                        db.add({
                           'chat': chatController.text,
                           'user': 'sismaret',
                           'timestamp': DateTime.now(),
