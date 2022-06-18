@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ChatContent extends StatelessWidget {
-  String chat;
-  Timestamp timeStamp;
-  String user;
+  String? chat;
+  Timestamp? timeStamp;
+  String? user;
 
   ChatContent(
       {Key? key,
@@ -24,7 +24,7 @@ class ChatContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              user,
+              user ?? '',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(
@@ -44,7 +44,7 @@ class ChatContent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(chat),
+                      Text(chat ?? ''),
                       const SizedBox(
                         height: 5,
                       ),

@@ -1,19 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ChatModel {
-  ChatModel({
-    this.content,
-    this.user,
-  });
+  ChatModel(
+      {required this.content, required this.user, required this.timeStamp});
 
   String? content;
   String? user;
+  Timestamp? timeStamp;
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
-        content: json["content"],
-        user: json["user"],
-      );
+  factory ChatModel.fromJson(Map<String, dynamic> data) => ChatModel(
+      content: data["chat"], user: data["user"], timeStamp: data['timestamp']);
 
   Map<String, dynamic> toJson() => {
-        "content": content,
+        "chat": content,
         "user": user,
+        "timestamp": timeStamp,
       };
 }

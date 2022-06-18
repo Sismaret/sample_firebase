@@ -2,6 +2,8 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:sample_firebase/model/chat_model.dart';
 import 'package:sample_firebase/widgets/chat_content.dart';
@@ -17,10 +19,9 @@ class _ChatWvState extends State<ChatWv> {
   @override
   Widget build(BuildContext context) {
     TextEditingController chatController = TextEditingController();
-    CollectionReference db = FirebaseFirestore.instance.collection('chats');
-    // final docRef = db.collection('chats');
-    ChatModel chatModel = ChatModel();
-
+    var fireStoreChat = FirebaseFirestore.instance.collection('chats');
+    var queryChat = fireStoreChat.orderBy('timestamp', descending: true);
+    List<ChatModel> chatModel = [];
     return Scaffold(
       appBar: AppBar(title: const Text('Chat Discussion')),
       body: Column(
@@ -29,24 +30,30 @@ class _ChatWvState extends State<ChatWv> {
             child: Container(
               decoration: const BoxDecoration(color: Colors.grey),
               child: FutureBuilder<QuerySnapshot>(
-                  future: db.get(),
+                  future: queryChat.get(),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      List<QueryDocumentSnapshot> result = snapshot.data!.docs;
+                      Iterable<Map<String, dynamic>> result = snapshot
+                          .data!.docs
+                          .map((e) => e.data() as Map<String, dynamic>);
+                      for (var item in result) {
+                        chatModel.add(ChatModel.fromJson(item));
+                      }
                       return ListView.builder(
                           reverse: true,
                           itemCount: result.length,
                           itemBuilder: ((context, index) {
                             return ChatContent(
-                              chat: result[index]['chat'],
-                              timeStamp: result[index]['timestamp'],
-                              user: result[index]['user'],
+                              chat: chatModel.elementAt(index).content,
+                              timeStamp: chatModel.elementAt(index).timeStamp,
+                              user: chatModel.elementAt(index).user,
                             );
                           }));
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
                   })),
             ),
           ),
@@ -55,9 +62,7 @@ class _ChatWvState extends State<ChatWv> {
               children: [
                 IconButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {
-                    // print(Timestamp(test.seconds, test.nanoseconds));
-                  },
+                  onPressed: () {},
                   icon: const Icon(
                     Icons.add_box,
                     color: Colors.blueAccent,
@@ -83,7 +88,7 @@ class _ChatWvState extends State<ChatWv> {
                 IconButton(
                     onPressed: () {
                       if (chatController.text.isNotEmpty) {
-                        db.add({
+                        fireStoreChat.add({
                           'chat': chatController.text,
                           'user': 'sismaret',
                           'timestamp': DateTime.now(),
