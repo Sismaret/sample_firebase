@@ -69,8 +69,8 @@ class _NavVwState extends State<NavVw> {
                   lblButton: 'Home',
                   goProfile: () {
                     _pageController.animateToPage(0,
-                        duration: const Duration(microseconds: 500),
-                        curve: Curves.easeInOut);
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.linearToEaseOut);
                   },
                 ),
                 ButtonNav(
@@ -92,8 +92,8 @@ class _NavVwState extends State<NavVw> {
                   lblButton: 'Language',
                   goProfile: () {
                     _pageController.animateToPage(1,
-                        duration: const Duration(microseconds: 500),
-                        curve: Curves.easeInOut);
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.linearToEaseOut);
                   },
                 ),
                 ButtonNav(
