@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sample_firebase/constants/app_labels.dart';
 import 'package:sample_firebase/helper/compare_date.dart';
 
 class ChatContent extends StatelessWidget {
@@ -20,6 +21,8 @@ class ChatContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
+    DateTime toDay = DateTime.now();
+    bool isToday = CompareDate.isEqualDate(timeStamp!.toDate(), toDay);
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Column(
@@ -27,7 +30,12 @@ class ChatContent extends StatelessWidget {
           isEqualDate == false
               ? Container(
                   decoration: BoxDecoration(color: Colors.white),
-                  child: Text(dateFormatter.format(timeStamp!.toDate())),
+                  child: isToday
+                      ? Text(
+                          'To Day',
+                          style: AppLabels.titleFormBlack,
+                        )
+                      : Text(dateFormatter.format(timeStamp!.toDate())),
                 )
               : Container(),
           Align(

@@ -94,8 +94,6 @@ class _ChatWvState extends State<ChatWv> {
                             reverse: true,
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: ((context, index) {
-                              bool isEqualDate = false;
-
                               return ChatContent(
                                 chat: chatModel.elementAt(index).content,
                                 timeStamp: chatModel.elementAt(index).timeStamp,
