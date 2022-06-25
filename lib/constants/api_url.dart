@@ -7,8 +7,8 @@ class ApiUrl {
   static String userUpdateProfile = 'users/update';
 
   static String exerciseSubject = 'exercise/data_course';
-  static String questionPackage = '';
-  static String exerciseQuestion = '/exercise/kerjakan';
-  static String exerciseSubmit = '/exercise/input_jawaban';
-  static String exerciseScore = '/exercise/score_result';
+  static String questionPackage = 'exercise/data_exercise';
+  static String exerciseQuestion = 'exercise/kerjakan';
+  static String exerciseSubmit = 'exercise/input_jawaban';
+  static String exerciseScore = 'exercise/score_result';
 }
