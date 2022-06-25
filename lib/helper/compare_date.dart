@@ -6,11 +6,6 @@ class CompareDate {
     String firstVal = formatter.format(firstDate);
     String secondVal = formatter.format(secondDate);
     bool isEqual = firstVal == secondVal ? true : false;
-    // print('===========================');
-    // print(firstVal);
-    // print(secondVal);
-    // print(isEqual);
-    // print('===========================');
     return isEqual;
   }
 }
